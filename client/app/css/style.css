@@ -1061,7 +1061,7 @@
     object-fit: cover;
   }
   
-  .product-featured .showcase-content { margin-top: 30px; }
+  .product-featured .showcase-content { margin-top: auto; }
   
   .product-featured .showcase-rating {
     color: var(--sandy-brown);

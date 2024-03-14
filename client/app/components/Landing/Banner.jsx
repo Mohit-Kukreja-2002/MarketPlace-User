@@ -9,26 +9,6 @@ const Banner = () => {
                 <div className="slider-container has-scrollbar">
                     <div className="slider-item">
                         <Image
-                            src="/images/banner-1.jpg"
-                            alt="women's latest fashion sale"
-                            className="banner-img"
-                            width={0}
-                            height={0}
-                            sizes="100vw"
-                        />
-                        <div className="banner-content">
-                            <p className="banner-subtitle">Trending item</p>
-                            <h2 className="banner-title">Women's latest fashion sale</h2>
-                            <p className="banner-text">
-                                starting at ₹ <b>199</b>.00
-                            </p>
-                            <Link href="#" className="banner-btn">
-                                Shop now
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="slider-item">
-                        <Image
                             src="/images/banner-2.jpg"
                             alt="modern sunglasses"
                             className="banner-img"
@@ -41,6 +21,26 @@ const Banner = () => {
                             <h2 className="banner-title">Modern sunglasses</h2>
                             <p className="banner-text">
                                 starting at ₹ <b>150</b>.00
+                            </p>
+                            <Link href="#" className="banner-btn">
+                                Shop now
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="slider-item">
+                        <Image
+                            src="/images/banner-1.jpg"
+                            alt="women's latest fashion sale"
+                            className="banner-img"
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                        />
+                        <div className="banner-content">
+                            <p className="banner-subtitle">Trending item</p>
+                            <h2 className="banner-title">Women's latest fashion sale</h2>
+                            <p className="banner-text">
+                                starting at ₹ <b>199</b>.00
                             </p>
                             <Link href="#" className="banner-btn">
                                 Shop now

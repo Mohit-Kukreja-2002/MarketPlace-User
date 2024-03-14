@@ -1,155 +1,70 @@
 "use client"
+import useGetSidebarProducts from '@/app/hooks/getSidebarProducts'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoAdd, IoRemove } from 'react-icons/io5'
 
 const Sidebar = () => {
     const [itemActive, setItemActive] = useState(0);
-    const sidebarProducts = [
-        {
-            "category": "Clothes",
-            "img": "dress.svg",
-            "products": [
-                {
-                    "name": "Shirt",
-                    "count": "300"
-                },
-                {
-                    "name": "Shorts & Jeans",
-                    "count": "200"
-                },
-                {
-                    "name": "Jackets",
-                    "count": "50"
-                },
-                {
-                    "name": "Dress & Frock",
-                    "count": "87"
-                },
-            ]
+    const { loading, getProducts } = useGetSidebarProducts();
+    const [products, setProducts] = useState({});
+
+    // Call getProducts when component mounts
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const products = await getProducts();
+                setProducts(products || {});
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const sidebarProducts = {
+        "Clothes": {
+            "Shirt": "300",
+            "Shorts_Jeans": "200",
+            "Jackets": "50",
+            "Dress_Frock": "87"
         },
-        {
-            "category": "Jewelry",
-            "img": "jewelry.svg",
-            "products": [
-                {
-                    "name": "Earrings",
-                    "count": "46"
-                },
-                {
-                    "name": "Couple Rings",
-                    "count": "200"
-                },
-                {
-                    "name": "Necklace",
-                    "count": "61"
-                },
-            ]
+        "Bags": {
+            "Shopping Bag": "68",
+            "Gym Backpack": "46",
+            "Purse": "79",
+            "Wallet": "73"
         },
-        {
-            "category": "Footwears",
-            "img": "shoes.svg",
-            "products": [
-                {
-                    "name": "Sports",
-                    "count": "100"
-                },
-                {
-                    "name": "Formal",
-                    "count": "200"
-                },
-                {
-                    "name": "Casual",
-                    "count": "50"
-                },
-                {
-                    "name": "Safety Shoes",
-                    "count": "87"
-                },
-            ]
+        "Jewelry": {
+            "Earrings": "46",
+            "Couple Rings": "200",
+            "Necklace": "61"
         },
-        {
-            "category": "Perfume",
-            "img": "perfume.svg",
-            "products": [
-                {
-                    "name": "Cloths Perfumes",
-                    "count": "12 pcs"
-                },
-                {
-                    "name": "Deoderant",
-                    "count": "60 pcs"
-                },
-            ]
+        "Footwears": {
+            "Sports": "100",
+            "Formal": "200",
+            "Casual": "50",
+            "Safety Shoes": "87"
         },
-        {
-            "category": "Glasses",
-            "img": "glasses.svg",
-            "products": [
-                {
-                    "name": "Sunglasses",
-                    "count": "68"
-                },
-                {
-                    "name": "Lenses",
-                    "count": "46"
-                },
-                {
-                    "name": "Body Wash",
-                    "count": "79"
-                },
-                {
-                    "name": "Makeup Kit",
-                    "count": "73"
-                },
-            ]
+        "Cosmetics": {
+            "Shampoo": "68",
+            "Sunscreen": "46",
+            "Body Wash": "79",
+            "Makeup Kit": "73"
         },
-        {
-            "category": "Cosmetics",
-            "img": "cosmetics.svg",
-            "products": [
-                {
-                    "name": "Shampoo",
-                    "count": "68"
-                },
-                {
-                    "name": "Sunscreen",
-                    "count": "46"
-                },
-                {
-                    "name": "Body Wash",
-                    "count": "79"
-                },
-                {
-                    "name": "Makeup Kit",
-                    "count": "73"
-                },
-            ]
+        "Glasses": {
+            "Sunglasses": "68",
+            "Lenses": "46",
+            "Body Wash": "79",
+            "Makeup Kit": "73"
         },
-        {
-            "category": "Bags",
-            "img": "bag.svg",
-            "products": [
-                {
-                    "name": "Shopping Bag",
-                    "count": "68"
-                },
-                {
-                    "name": "Gym Backpack",
-                    "count": "46"
-                },
-                {
-                    "name": "Purse",
-                    "count": "79"
-                },
-                {
-                    "name": "Wallet",
-                    "count": "73"
-                },
-            ]
+        "Perfume": {
+            "Cloths Perfumes": "12 pcs",
+            "Deoderant": "60 pcs"
         },
-    ]
+    };
+    
     return (
         <div className="sidebar has-scrollbar">
             <div className="sidebar-category">
@@ -163,7 +78,7 @@ const Sidebar = () => {
 
                 <ul className="sidebar-menu-category-list">
                     {
-                        sidebarProducts.map((sidebar, i) => {
+                        Object.entries(Object.entries(products).length > 0 ? products : sidebarProducts).map(([category, productList], i) => {
                             return <div key={i}>
                                 <li className="sidebar-menu-category">
                                     <button className="sidebar-accordion-menu"
@@ -173,27 +88,27 @@ const Sidebar = () => {
                                     >
                                         <div className="menu-title-flex">
                                             <Image
-                                                src={`/images/icons/${sidebar.img}`}
-                                                alt={sidebar.category}
+                                                src={`/images/icons/${category.toLowerCase()}.svg`}
+                                                alt={category}
                                                 width={20}
                                                 height={20}
                                                 className="menu-title-img"
                                             />
-                                            <p className="menu-title">{sidebar.category}</p>
+                                            <p className="menu-title">{category}</p>
                                         </div>
                                         <div className='text-[#454545]'>
                                             <IoAdd className={`${itemActive === i + 1 ? "hidden" : "block"} add-icon`} />
                                             <IoRemove className={`${itemActive === i + 1 ? "block" : "hidden"} remove-icon`} />
                                         </div>
                                     </button>
-                                    <ul className={`sidebar-submenu-category-list ${itemActive === i + 1 && "block" }`}>
+                                    <ul className={`sidebar-submenu-category-list ${itemActive === i + 1 && "block"}`}>
                                         {
-                                            sidebar.products.map((product,indx) => {
-                                                return <li key={product + indx} className="sidebar-submenu-category">
+                                            Object.entries(productList).map(([productName, count], indx) => {
+                                                return <li key={category + indx} className="sidebar-submenu-category">
                                                     <Link href="#" className="sidebar-submenu-title">
-                                                        <p className="product-name">{product.name}</p>
-                                                        <data value={product.count} className="stock" title="Available Stock">
-                                                            {product.count}
+                                                        <p className="product-name">{productName}</p>
+                                                        <data value={count} className="stock" title="Available Stock">
+                                                            {count}
                                                         </data>
                                                     </Link>
                                                 </li>
