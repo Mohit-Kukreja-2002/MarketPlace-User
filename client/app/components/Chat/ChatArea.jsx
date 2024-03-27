@@ -7,6 +7,9 @@ import Skeleton from "@mui/material/Skeleton";
 import MessageSelf from "./MessagSelf.jsx";
 import { useDispatch, useSelector } from "react-redux";
 
+import Image from "next/image";
+
+
 import useGetChat from "../../hooks/chat/getChat.jsx";
 import useSendMessage from "../../hooks/chat/sendMessage.jsx";
 
@@ -152,16 +155,26 @@ function ChatArea({ socket }) {
         return (
             <div className={"chatArea-container"}>
                 <div className={"chatArea-header"}>
-                    <p className={"con-icon"}>
-                        {selectedChat[0].shopName[0]}
-                    </p>
+                    {
+                        selectedChat[0]?.avatar?.url
+                            ? <Image
+                                src={selectedChat[0]?.avatar?.url}
+                                alt={`${selectedChat[0].shopName} Pic`}
+                                height={400}
+                                width={400}
+                                className="con-icon"
+                            />
+                            : <p className={"con-icon"}>
+                                {selectedChat[0].shopName[0]}
+                            </p>
+                    }
                     <div className="flex flex-col grow">
                         <div className={"header-text"}>
                             <p className={"con-title"}>
                                 {
-                                    selectedChat[0].shopName.length > 13 
-                                    ? selectedChat[0].shopName.slice(0,10) + "..."
-                                    : selectedChat[0].shopName
+                                    selectedChat[0].shopName.length > 13
+                                        ? selectedChat[0].shopName.slice(0, 10) + "..."
+                                        : selectedChat[0].shopName
                                 }
                             </p>
                         </div>
