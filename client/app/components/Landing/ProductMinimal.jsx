@@ -1,12 +1,14 @@
 "use client"
-import useGetProductMinimal from '@/app/hooks/getProductMinimal';
 import Image from 'next/image';
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast';
+
+// Custom hooks
+import useGetProductMinimal from '../../hooks/products/getProductMinimal';
 
 const ProductMinimal = () => {
 
+    // dummy data
     const clothing = [
         {
             productName: "Relaxed Short full Sleeve T-Shirt",
@@ -28,7 +30,7 @@ const ProductMinimal = () => {
         },
         {
             productName: "Red Floral Wrap Midi Skirt",
-            categoty: "Skirts",
+            category: "Skirts",
             price: "700",
             discount: "22",
             image: [{
@@ -82,6 +84,7 @@ const ProductMinimal = () => {
         },
     ]
 
+    // dummy data
     const footwear = [
         {
             productName: "Running & Trekking Shoes - White",
@@ -141,6 +144,7 @@ const ProductMinimal = () => {
         }
     ];
 
+    // dummy data
     const accessory = [
         {
             productName: "Pocket Watch Leather Pouch",
@@ -217,20 +221,24 @@ const ProductMinimal = () => {
     ];
 
 
-
     const [clothes, setClothes] = useState(clothing);
     const [footwears, setFootWears] = useState(footwear);
     const [accessories, setAccessories] = useState(accessory);
 
+    // get products using custom hooks
     const { loading, getProducts } = useGetProductMinimal()
 
+
+    // fetch data when component is loaded
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getProducts();
-                setClothes(data.clothes.concat(clothing))
-                setFootWears(data.footwears.concat(footwear))
-                setAccessories(data.accessories.concat(accessory))
+                if (data[0]) {
+                    setClothes(data[1].clothes.concat(clothing))
+                    setFootWears(data[1].footwears.concat(footwear))
+                    setAccessories(data[1].accessories.concat(accessory))
+                }
             } catch (e) {
                 console.error('Error fetching products:', e);
             }
@@ -249,32 +257,32 @@ const ProductMinimal = () => {
                             <div key={i} className="showcase-container">
                                 {
                                     clothes.slice(i * 4, (i + 1) * 4).map((product, indx) => {
-                                        return <div key={indx} className="showcase">
-                                            <Link href="#" className="showcase-img-box">
+                                        return <Link href={`product/${product._id}`} key={indx} className="showcase">
+                                            <div className="showcase-img-box">
                                                 <Image
-                                                    src={product.image[0]?.url || clothing[indx].image[0].url}
+                                                    src={product.image[0]?.url || clothing[i*4 + indx].image[0].url}
                                                     alt={product.productName}
                                                     height={30}
                                                     width={70}
                                                     style={{ "maxHeight": "70px", "minWidth": "70px" }}
                                                     className="showcase-img"
                                                 />
-                                            </Link>
+                                            </div>
                                             <div className="showcase-content">
-                                                <Link href="#">
+                                                <div>
                                                     <h4 className="showcase-title">
                                                         {product.productName}
                                                     </h4>
-                                                </Link>
-                                                <Link href="#" className="showcase-category">
-                                                    {product.category}
-                                                </Link>
+                                                </div>
+                                                <div className="showcase-category">
+                                                    {product.category?.replace("_"," ")}
+                                                </div>
                                                 <div className="price-box">
                                                     <p className="price">₹{product.price - Math.round((Number(product.discount) * Number(product.price) / 100))}</p>
                                                     <del> ₹{product.price}</del>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     })
                                 }
                             </div>
@@ -292,32 +300,32 @@ const ProductMinimal = () => {
                             <div key={i} className="showcase-container">
                                 {
                                     footwears.slice(i * 4, (i + 1) * 4).map((product, indx) => {
-                                        return <div key={indx} className="showcase">
-                                            <Link href="#" className="showcase-img-box">
+                                        return <Link href={`product/${product._id}`} key={indx} className="showcase">
+                                            <div className="showcase-img-box">
                                                 <Image
-                                                    src={product.image[0]?.url || footwears[indx].image[0].url}
+                                                    src={product.image[0]?.url || footwear[i*4 + indx]?.image[0]?.url}
                                                     alt={product.productName}
                                                     height={30}
                                                     width={70}
                                                     style={{ "maxHeight": "70px", "minWidth": "70px" }}
                                                     className="showcase-img"
                                                 />
-                                            </Link>
+                                            </div>
                                             <div className="showcase-content">
-                                                <Link href="#">
+                                                <div>
                                                     <h4 className="showcase-title">
                                                         {product.productName}
                                                     </h4>
-                                                </Link>
-                                                <Link href="#" className="showcase-category">
-                                                    {product.category}
-                                                </Link>
+                                                </div>
+                                                <div className="showcase-category">
+                                                    {product.category?.replace("_"," ")}
+                                                </div>
                                                 <div className="price-box">
                                                     <p className="price">₹{product.price - Math.round((Number(product.discount) * Number(product.price) / 100))}</p>
                                                     <del> ₹{product.price}</del>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     })
                                 }
                             </div>
@@ -332,35 +340,36 @@ const ProductMinimal = () => {
                 <div className="showcase-wrapper has-scrollbar">
                     {
                         [0, 1].map((i) => (
+                            
                             <div key={i} className="showcase-container">
                                 {
                                     accessories.slice(i * 4, (i + 1) * 4).map((product, indx) => {
-                                        return <div key={indx} className="showcase">
-                                            <Link href="#" className="showcase-img-box">
+                                        return <Link href={`product/${product._id}`} key={indx} className="showcase">
+                                            <div className="showcase-img-box">
                                                 <Image
-                                                    src={product.image[0]?.url || accessories[indx].image[0].url}
+                                                    src={product.image[0]?.url || accessory[i*4 + indx].image[0].url}
                                                     alt={product.productName}
                                                     height={30}
                                                     width={70}
                                                     style={{ "maxHeight": "70px", "minWidth": "70px" }}
                                                     className="showcase-img"
                                                 />
-                                            </Link>
+                                            </div>
                                             <div className="showcase-content">
-                                                <Link href="#">
+                                                <div>
                                                     <h4 className="showcase-title">
                                                         {product.productName}
                                                     </h4>
-                                                </Link>
-                                                <Link href="#" className="showcase-category">
-                                                    {product.category}
-                                                </Link>
+                                                </div>
+                                                <div className="showcase-category">
+                                                    {product.category.replace("_"," ")}
+                                                </div>
                                                 <div className="price-box">
                                                     <p className="price">₹{product.price - Math.round((Number(product.discount) * Number(product.price) / 100))}</p>
                                                     <del> ₹{product.price}</del>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     })
                                 }
                             </div>

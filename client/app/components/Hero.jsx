@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import React from 'react'
+
+// Components for landing page
 import Banner from './Landing/banner'
 import Category from './Landing/Category'
 import Testimonials from './Landing/Testimonials'
@@ -10,37 +11,40 @@ import DealOfDay from './Landing/DealOfDay'
 
 const Hero = () => {
     return (
-        <main>
-            {/* - BANNER */}
-            <Banner/>
+        <>
+            <main>
+                
+                {/* - BANNER */}
+                <Banner />
 
-            {/*- CATEGORY*/}
-            <Category/>
+                {/*- CATEGORY*/}
+                <Category />
 
-            {/* - PRODUCT*/}
-            <div className="product-container">
-                <div className="container">
+                {/* - PRODUCT*/}
+                <div className="product-container">
+                    <div className="container">
 
-                    {/*- SIDEBAR*/}
-                    <Sidebar/>
+                        {/*- SIDEBAR*/}
+                        <Sidebar />
 
-                    <div className="product-box">
-                        {/* - PRODUCT MINIMAL */}
-                        <ProductMinimal/>
+                        <div className="product-box">
+                            {/* - PRODUCT MINIMAL */}
+                            <ProductMinimal />
 
-                        {/* - PRODUCT FEATURED */}
-                        <DealOfDay/>
-                        
-                        {/* - PRODUCT GRID */}
-                        <ProductGrid/>
+                            {/* - PRODUCT FEATURED */}
+                            <DealOfDay />
+
+                            {/* - PRODUCT GRID */}
+                            <ProductGrid />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/*- TESTIMONIALS, CTA & SERVICE*/}
-            <Testimonials/>
-            
-        </main>
+                {/*- TESTIMONIALS, CTA & SERVICE*/}
+                <Testimonials />
+
+            </main>
+        </>
     )
 }
 

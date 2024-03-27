@@ -22,7 +22,7 @@ const Banner = () => {
                             <p className="banner-text">
                                 starting at ₹ <b>150</b>.00
                             </p>
-                            <Link href="#" className="banner-btn">
+                            <Link href={`/search/sunglasses`} className="banner-btn">
                                 Shop now
                             </Link>
                         </div>
@@ -42,7 +42,7 @@ const Banner = () => {
                             <p className="banner-text">
                                 starting at ₹ <b>199</b>.00
                             </p>
-                            <Link href="#" className="banner-btn">
+                            <Link href={'/search/women'} className="banner-btn">
                                 Shop now
                             </Link>
                         </div>
@@ -62,7 +62,7 @@ const Banner = () => {
                             <p className="banner-text">
                                 starting at ₹ <b>200</b>.00
                             </p>
-                            <Link href="#" className="banner-btn">
+                            <Link href={'/search/summer'} className="banner-btn">
                                 Shop now
                             </Link>
                         </div>

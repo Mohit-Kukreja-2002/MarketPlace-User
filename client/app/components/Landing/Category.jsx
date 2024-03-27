@@ -1,11 +1,15 @@
 "use client"
-import useGetCategories from '@/app/hooks/getCategories';
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
+// Custom Hooks
+import useGetCategories from '../../hooks/products/getCategories';
+
 const Category = () => {
     const height = 30, width = 30;
+
+    // temoprary items so that till the first fetch happens user dont have to wait
     const items = {
         "Clothes": "196",
         "Winters": "170",
@@ -18,19 +22,22 @@ const Category = () => {
     }
 
     const [categories, setCategories] = useState({})
+
+    // getting categories using a custom hook
     const { loading, getCategories } = useGetCategories();
 
+    // Fetch data when page mounts up
     useEffect(() => {
         async function fetchData() {
             try {
-                const categories = await getCategories();
-                setCategories(categories || {});
+                const response = await getCategories();
+                if(response[0]) setCategories(response[1] || items);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
         }
         fetchData();
-    })
+    },[])
 
     return (
         <div className="category">
@@ -52,33 +59,12 @@ const Category = () => {
                                         <h3 className="category-item-title">{category.toUpperCase()}</h3>
                                         <p className="category-item-amount">{quantity}</p>
                                     </div>
-                                    <Link href="#" className="category-btn">
+                                    <Link href={`/search/${category}`} className="category-btn">
                                         Show all
                                     </Link>
                                 </div>
                             </div>
                         })
-                        // items.map(function (item, index) {
-                        //     return <div key={index} className="category-item">
-                        //         <div className="category-img-box">
-                        //             <Image
-                        //                 src={`/images/icons/${item.category}.svg`}
-                        //                 alt="dress & frock"
-                        //                 width={width}
-                        //                 height={height}
-                        //             />
-                        //         </div>
-                        //         <div className="category-content-box">
-                        //             <div className="category-content-flex">
-                        //                 <h3 className="category-item-title">{item.category.toUpperCase()}</h3>
-                        //                 <p className="category-item-amount">{item.quantity}</p>
-                        //             </div>
-                        //             <Link href="#" className="category-btn">
-                        //                 Show all
-                        //             </Link>
-                        //         </div>
-                        //     </div>
-                        // })
                     }
                 </div>
             </div>

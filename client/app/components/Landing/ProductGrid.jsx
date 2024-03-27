@@ -1,10 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import useGetProductGrid from '@/app/hooks/getProductGrid';
+
+// custom hooks
+import useGetProductGrid from '../../hooks/products/getProductGrid';
 
 const ProductGrid = () => {
 
+    // dummy data
     const productGrid = [
         {
             category: "jacket",
@@ -178,13 +181,15 @@ const ProductGrid = () => {
 
     const [products, setProducts] = useState(productGrid);
 
+    // get products using this hook
     const {loading, getProducts} = useGetProductGrid();
 
+    // fetch products when component is loaded
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getProducts();
-                setProducts(data.concat(productGrid));
+                if(data[0]) setProducts(data[1].concat(productGrid));
             } catch (e) {
                 console.error('Error fetching products: ', e);
             }
@@ -197,8 +202,8 @@ const ProductGrid = () => {
             <h2 className="title">New Products</h2>
             <div className="product-grid">
                 {
-                    products.map((product, indx) => (
-                        <div key={indx} className="flex flex-col showcase">
+                    products.slice(0,12).map((product, indx) => (
+                        <Link href={`/product/${product._id}`} key={indx} className="flex flex-col showcase">
                             <div className="my-auto showcase-banner">
                                 <img
                                     src={(product.image?.length > 0 ? true : false )? product.image[0]?.url : productGrid[indx].image[0].url}
@@ -213,43 +218,20 @@ const ProductGrid = () => {
                                     className="product-img hover"
                                 />
                                 <p className="showcase-badge">{product.discount + '%'}</p>
-                                {/* <div className="showcase-actions">
-                                    <button className="btn-action">
-                                        <ion-icon name="heart-outline" />
-                                    </button>
-                                    <button className="btn-action">
-                                        <ion-icon name="eye-outline" />
-                                    </button>
-                                    <button className="btn-action">
-                                        <ion-icon name="repeat-outline" />
-                                    </button>
-                                    <button className="btn-action">
-                                        <ion-icon name="bag-add-outline" />
-                                    </button>
-                                </div> */}
                             </div>
                             <div className="mt-auto showcase-content">
-                                <Link href="#" className="showcase-category">
+                                <div className="showcase-category">
                                     {product.category?.toUpperCase()}
-                                </Link>
-                                <Link href="#">
                                     <h3 className="showcase-title">
                                         {product.productName}
                                     </h3>
-                                </Link>
-                                {/* <div className="showcase-rating">
-                                    <ion-icon name="star" />
-                                    <ion-icon name="star" />
-                                    <ion-icon name="star" />
-                                    <ion-icon name="star-outline" />
-                                    <ion-icon name="star-outline" />
-                                </div> */}
+                                </div>
                                 <div className="price-box">
                                     <p className="price">₹{product.price - Math.round((Number(product.discount) * Number(product.price) / 100))}</p>
                                     <del> ₹{product.price}</del>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 }
             </div>

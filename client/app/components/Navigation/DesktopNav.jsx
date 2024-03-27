@@ -9,37 +9,37 @@ const DesktopNav = () => {
                 <ul className="desktop-menu-category-list">
 
                     <li className="menu-category">
-                        <Link href="#" className="menu-title">Home</Link>
+                        <Link href={'/'} className="menu-title">Home</Link>
                     </li>
 
                     <li className="menu-category">
-                        <Link href="#" className="menu-title">Categories</Link>
+                        <div className="menu-title">Categories</div>
 
                         <div className="dropdown-panel">
                             <ul className="dropdown-panel-list">
 
                                 <li className="menu-title">
-                                    <Link href="#">Electronics</Link>
+                                    <Link href={`/search/Electronics`}>Electronics</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Desktop</Link>
+                                    <Link href={`/search/Desktop`}>Desktop</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Laptop</Link>
+                                    <Link href={`/search/Laptop`}>Laptop</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Camera</Link>
+                                    <Link href={`/search/Camera`}>Camera</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Tablet</Link>
+                                    <Link href={`/search/Tablet`} >Tablet</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Headphone</Link>
+                                    <Link href={`/search/Headphone`}>Headphone</Link>
                                 </li>
 
                             </ul>
@@ -47,27 +47,27 @@ const DesktopNav = () => {
                             <ul className="dropdown-panel-list">
 
                                 <li className="menu-title">
-                                    <Link href="#">Men's</Link>
+                                    <Link href={`/search/Men`}>Men's</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Formal</Link>
+                                    <Link href={`/search/Mens Formal`}>Formal</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Casual</Link>
+                                    <Link href={`/search/Mens Casual`}>Casual</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Sports</Link>
+                                    <Link href={`/search/Sports`}>Sports</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Jacket</Link>
+                                    <Link href={`/search/Jacket`}>Jacket</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Sunglasses</Link>
+                                    <Link href={`/search/Sunglasses`}>Sunglasses</Link>
                                 </li>
 
                             </ul>
@@ -75,27 +75,27 @@ const DesktopNav = () => {
                             <ul className="dropdown-panel-list">
 
                                 <li className="menu-title">
-                                    <Link href="#">Women's</Link>
+                                    <Link href={`/search/Women`}>Women's</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Formal</Link>
+                                    <Link href={`/search/Women Formal`}>Formal</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Casual</Link>
+                                    <Link href={`/search/Women Casual`}>Casual</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Perfume</Link>
+                                    <Link href={`/search/Perfume`}>Perfume</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Cosmetics</Link>
+                                    <Link href={`/search/Cosmetics`}>Cosmetics</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Bags</Link>
+                                    <Link href={`/search/Bags`}>Bags</Link>
                                 </li>
 
                             </ul>
@@ -103,27 +103,27 @@ const DesktopNav = () => {
                             <ul className="dropdown-panel-list">
 
                                 <li className="menu-title">
-                                    <Link href="#">Daily Essentials</Link>
+                                    <Link href={`/search/Daily Essentials`}>Daily Essentials</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Dairy</Link>
+                                    <Link href={`/search/Dairy`}>Dairy</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Fruits</Link>
+                                    <Link href={`/search/Fruits`}>Fruits</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Drinks</Link>
+                                    <Link href={`/search/Drinks`}>Drinks</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Consumables</Link>
+                                    <Link href={`/search/Consumables`}>Consumables</Link>
                                 </li>
 
                                 <li className="panel-list-item">
-                                    <Link href="#">Medicines</Link>
+                                    <Link href={`/search/Medicines`}>Medicines</Link>
                                 </li>
 
                             </ul>
@@ -131,79 +131,75 @@ const DesktopNav = () => {
                     </li>
 
                     <li className="menu-category">
-                        <Link href="#" className="menu-title">Gaming</Link>
+                        <Link href={`/search/Gaming`} className="menu-title">Gaming</Link>
 
                         <ul className="dropdown-list">
 
                             <li className="dropdown-item">
-                                <Link href="#">Controllers</Link>
+                                <Link href={`/search/Controllers`} >Controllers</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Ipad</Link>
+                                <Link href={`/search/Ipad`} >Ipad</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Earphones</Link>
+                                <Link href={`/search/Earphones`} >Earphones</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Glasses</Link>
+                                <Link href={`/search/Gaming Glasses`} >Glasses</Link>
                             </li>
 
                         </ul>
                     </li>
 
                     <li className="menu-category">
-                        <Link href="#" className="menu-title">Furniture</Link>
+                        <Link href={`/search/Furniture`} className="menu-title">Furniture</Link>
 
                         <ul className="dropdown-list">
 
                             <li className="dropdown-item">
-                                <Link href="#">Table&apos;s</Link>
+                                <Link href={`/search/Table`} >Table&apos;s</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Bed&apos;s</Link>
+                                <Link href={`/search/Bed`} >Bed&apos;s</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Sofa&apos;s</Link>
+                                <Link href={`/search/Sofa`} >Sofa&apos;s</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Chair&apos;s</Link>
+                                <Link href={`/search/Chair`} >Chair&apos;s</Link>
                             </li>
 
                         </ul>
                     </li>
 
                     <li className="menu-category">
-                        <Link href="#" className="menu-title">Jewelry</Link>
+                        <Link href={`/search/Jewelry`}  className="menu-title">Jewelry</Link>
 
                         <ul className="dropdown-list">
 
                             <li className="dropdown-item">
-                                <Link href="#">Earrings</Link>
+                                <Link href={`/search/Earrings`} >Earrings</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Couple Rings</Link>
+                                <Link href={`/search/Couple Rings`} >Couple Rings</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Necklace</Link>
+                                <Link href={`/search/Necklace`} >Necklace</Link>
                             </li>
 
                             <li className="dropdown-item">
-                                <Link href="#">Bracelets</Link>
+                                <Link href={`/search/Bracelets`} >Bracelets</Link>
                             </li>
 
                         </ul>
-                    </li>
-
-                    <li className="menu-category">
-                        <Link href="#" className="menu-title">Hot Offers</Link>
                     </li>
 
                 </ul>

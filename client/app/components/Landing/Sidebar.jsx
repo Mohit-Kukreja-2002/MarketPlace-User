@@ -1,28 +1,23 @@
 "use client"
-import useGetSidebarProducts from '@/app/hooks/getSidebarProducts'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+
+// Icons
 import { IoAdd, IoRemove } from 'react-icons/io5'
 
+// Custom hooks
+import useGetSidebarProducts from '../../hooks/products/getSidebarProducts'
+
 const Sidebar = () => {
+    // Usestate to manage the opening/closing of a particular category
     const [itemActive, setItemActive] = useState(0);
-    const { loading, getProducts } = useGetSidebarProducts();
     const [products, setProducts] = useState({});
 
-    // Call getProducts when component mounts
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const products = await getProducts();
-                setProducts(products || {});
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        };
-        fetchData();
-    }, []);
+    // getting product using custom hook
+    const { loading, getProducts } = useGetSidebarProducts();
 
+    // dummy data 
     const sidebarProducts = {
         "Clothes": {
             "Shirt": "300",
@@ -64,7 +59,20 @@ const Sidebar = () => {
             "Deoderant": "60 pcs"
         },
     };
-    
+
+    // Call getProducts when component mounts
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const products = await getProducts();
+                if (products[0]) setProducts(products[1] || sidebarProducts);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+        fetchData();
+    }, []);
+
     return (
         <div className="sidebar has-scrollbar">
             <div className="sidebar-category">
@@ -105,8 +113,8 @@ const Sidebar = () => {
                                         {
                                             Object.entries(productList).map(([productName, count], indx) => {
                                                 return <li key={category + indx} className="sidebar-submenu-category">
-                                                    <Link href="#" className="sidebar-submenu-title">
-                                                        <p className="product-name">{productName}</p>
+                                                    <Link href={`/search/${productName.replace("_"," ")}`} className="sidebar-submenu-title">
+                                                        <p className="product-name">{productName.replace("_"," ")}</p>
                                                         <data value={count} className="stock" title="Available Stock">
                                                             {count}
                                                         </data>
@@ -122,94 +130,6 @@ const Sidebar = () => {
                 </ul>
             </div>
 
-            {/* Best Sellers */}
-            <div className="product-showcase">
-                <h3 className="showcase-heading">best sellers</h3>
-                <div className="showcase-wrapper">
-                    <div className="showcase-container">
-                        <div className="showcase">
-                            <a href="#" className="showcase-img-box">
-                                <Image
-                                    src="/images/products/1.jpg"
-                                    alt="baby fabric shoes"
-                                    width={75}
-                                    height={75}
-                                    className="showcase-img"
-                                />
-                            </a>
-                            <div className="showcase-content">
-                                <a href="#">
-                                    <h4 className="showcase-title">baby fabric shoes</h4>
-                                </a>
-                                <div className="price-box">
-                                    <del>$5.00</del>
-                                    <p className="price">$4.00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="showcase">
-                            <a href="#" className="showcase-img-box">
-                                <Image
-                                    src="/images/products/2.jpg"
-                                    alt="men's hoodies t-shirt"
-                                    className="showcase-img"
-                                    width={75}
-                                    height={75}
-                                />
-                            </a>
-                            <div className="showcase-content">
-                                <a href="#">
-                                    <h4 className="showcase-title">men's hoodies t-shirt</h4>
-                                </a>
-                                <div className="price-box">
-                                    <del>$17.00</del>
-                                    <p className="price">$7.00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="showcase">
-                            <a href="#" className="showcase-img-box">
-                                <Image
-                                    src="/images/products/3.jpg"
-                                    alt="girls t-shirt"
-                                    className="showcase-img"
-                                    width={75}
-                                    height={75}
-                                />
-                            </a>
-                            <div className="showcase-content">
-                                <a href="#">
-                                    <h4 className="showcase-title">girls t-shirt</h4>
-                                </a>
-                                <div className="price-box">
-                                    <del>$5.00</del>
-                                    <p className="price">$3.00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="showcase">
-                            <a href="#" className="showcase-img-box">
-                                <Image
-                                    src="/images/products/4.jpg"
-                                    alt="woolen hat for men"
-                                    className="showcase-img"
-                                    width={75}
-                                    height={75}
-                                />
-                            </a>
-                            <div className="showcase-content">
-                                <a href="#">
-                                    <h4 className="showcase-title">woolen hat for men</h4>
-                                </a>
-                                <div className="price-box">
-                                    <del>$15.00</del>
-                                    <p className="price">$12.00</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }
